@@ -21,3 +21,6 @@ docs/*
 
 # Windows noise
 desktop.ini
+
+#Eclipse noise
+WEB-INF/classes/*
