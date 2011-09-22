@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project name="ISBN Book Renamer" default="install" basedir=".">
+	
+	<property name="VERSION" value="1.1" />
+	
+	<tstamp>
+		<format property="BUILD.TIME" pattern="yyyy/MM/dd:HH:mm:ss" />
+	</tstamp>
+
+	<target name="install" >
+		<!-- create the release folder -->
+		<mkdir dir="release" />
+		<buildnumber file="build.number" />
+		
+		<!-- compile this class -->
+		<delete dir="stage" />
+		<mkdir dir="stage" />
+		<javac srcdir="src" includes="**/ISBN*.java" destdir="stage" debug="false" encoding="UTF-8"/>
+		
+		<!-- create the packager -->
+		<jar destfile="release/ISBNBookRenamer-${VERSION}-b${build.number}.jar">
+			<fileset dir="stage" />
+			<manifest>
+				<attribute name="Product-Name" value="ISBN Book Renamer" />
+				<attribute name="Product-Version" value="1.0" />
+				<attribute name="Product-Author" value="Sandeep Gupta" />
+				<attribute name="Build-Number" value="${build.number}" />
+				<attribute name="Build-Date" value="${BUILD.TIME}" />
+				<attribute name="Main-Class" value="com.sangupta.isbntools.ISBNBookRenamer" />
+			</manifest>
+		</jar>
+		
+		<!-- delete stage -->
+		<delete dir="stage" />
+	</target>
+	
+</project>
